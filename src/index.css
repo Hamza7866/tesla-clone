@@ -22,3 +22,7 @@ body {
     transform: translateY(30px);
   }
 }
+
+a {
+  text-decoration: none;
+}
