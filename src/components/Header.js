@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+
 const Header = () => {
+  const [bugerToggle, setBugerToggle] = useState(false);
+
   return (
     <Container>
       <a>
@@ -21,10 +25,37 @@ const Header = () => {
       <RightMenu>
         <a href="">Shop</a>
         <a href="">TESLA ACCOUNT</a>
-        <CustomIcon>
+        <CustomIcon
+          onClick={() => setBugerToggle((bugerToggle) => !bugerToggle)}
+        >
           <MenuIcon />
         </CustomIcon>
       </RightMenu>
+      <Burger show={bugerToggle}>
+        <CustomClose
+          onClick={() => setBugerToggle((bugerToggle) => !bugerToggle)}
+        >
+          <CloseIcon />
+        </CustomClose>
+        <li>
+          <a href="">Existing Inventory</a>
+        </li>
+        <li>
+          <a href="">Used Inventory</a>
+        </li>
+        <li>
+          <a href="">Trade-in</a>
+        </li>
+        <li>
+          <a href="">Cybertruck</a>
+        </li>
+        <li>
+          <a href="">Roadastar</a>
+        </li>
+        <li>
+          <a href="">Semi</a>
+        </li>
+      </Burger>
     </Container>
   );
 };
@@ -38,8 +69,9 @@ const Container = styled.div`
   padding: 15px 20px;
   cursor: pointer;
   display: flex;
-  /* justify-content: space-around; */
+  justify-content: space-between;
   align-items: center;
+  z-index: 1;
 `;
 const Menu = styled.div`
   display: flex;
@@ -60,14 +92,50 @@ const Menu = styled.div`
 const RightMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 70px;
+
+  margin-left: 300px;
   a {
     font-weight: 600;
     padding-left: 15px;
     text-transform: uppercase;
   }
+  @media (max-width: 760px) {
+    margin-left: 300px;
+  }
+  @media (max-width: 500px) {
+    margin-left: 100px;
+  }
 `;
 
 const CustomIcon = styled(MenuIcon)`
+  cursor: pointer;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`;
+
+const Burger = styled.div`
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  z-index: 100;
+  list-style: none;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  li {
+    border-bottom: 1px solid black;
+    padding: 15px 0;
+    font-weight: 600;
+  }
+  display: ${(props) => (props.show ? "block" : "none")};
+`;
+const CustomClose = styled.div`
+  display: flex;
+  justify-content: flex-end;
   cursor: pointer;
 `;
